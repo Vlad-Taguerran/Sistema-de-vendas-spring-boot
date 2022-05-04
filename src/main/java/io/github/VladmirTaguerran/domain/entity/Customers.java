@@ -9,7 +9,7 @@ public class Customers {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Integer id;
-
+    @Column(name = "name", length = 100, nullable = false)
     private String name;
 
 

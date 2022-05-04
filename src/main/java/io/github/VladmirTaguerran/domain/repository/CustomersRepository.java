@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+
+import javax.persistence.EntityManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -22,9 +25,12 @@ public class CustomersRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private EntityManager entityManeger;
 
+    @Transactional
     public Customers save(Customers customer){
-        jdbcTemplate.update(iNSERT, new Object[]{customer.getName()});
+        entityManeger.persist(customer);
         return customer;
     }
 
@@ -44,17 +50,21 @@ public class CustomersRepository {
         };
     }
 
-
+    @Transactional
     public Customers update(Customers customer){
-        jdbcTemplate.update(UPDATE,new Object[]{customer.getId(),customer.getName()} );
+        entityManeger.merge(customer);
+
         return customer;
     }
-
+    @Transactional
     public void delete(Customers customer){
-        delete(customer.getId());
+        entityManeger.remove(customer);
     }
+    @Transactional
     public void delete(int id){
-        jdbcTemplate.update(DELETE, new Object[]{id});
+        Customers customer = entityManeger.find(Customers.class, id);
+        delete(customer);
+
 
     }
 
