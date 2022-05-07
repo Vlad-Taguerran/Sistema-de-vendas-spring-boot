@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootApplication
 @RestController
@@ -24,9 +25,11 @@ public class VendasApplication {
     public CommandLineRunner init(@Autowired CustomersRepository customers){
         return args -> {
             customers.save(new Customers("teste1"));
-
-            List<Customers> listAll = customers.listAll();
+            customers.save(new Customers("VLAD"));
+            Optional<Customers> teste = customers.findById(2);
+            List<Customers> listAll = customers.findAll();
             listAll.forEach(System.out::println);
+            System.out.println(teste);
         };
 
 

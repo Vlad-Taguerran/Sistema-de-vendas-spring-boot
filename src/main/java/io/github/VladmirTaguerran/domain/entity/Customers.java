@@ -3,7 +3,7 @@ package io.github.VladmirTaguerran.domain.entity;
 import javax.persistence.*;
 
 @Entity
-@Table  //Quando o nome da tabela for diferente da classe adicionar indentificador
+@Table (name = "Custumers") //Quando o nome da tabela for diferente da classe adicionar indentificador
 public class Customers {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
