@@ -1,9 +1,19 @@
 package io.github.VladmirTaguerran.domain.entity;
 
+import javax.persistence.*;
+
+@Entity
 public class OrderItem {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
     private Order order;
+    @ManyToOne
+    @JoinColumn(name = "product_ID")
     private Product product;
+    @Column
     private int quantity;
 
     public int getId() {

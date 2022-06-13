@@ -1,10 +1,17 @@
 package io.github.VladmirTaguerran.domain.entity;
 
-import java.math.BigDecimal;
+import org.springframework.lang.NonNull;
 
+import javax.persistence.*;
+import java.math.BigDecimal;
+@Entity
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @NonNull
     private String name;
+    @Column(length = 20,precision = 2)
     private BigDecimal price;
 
     public Integer getId() {

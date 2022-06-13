@@ -1,6 +1,7 @@
 package io.github.VladmirTaguerran.domain.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table (name = "Custumers") //Quando o nome da tabela for diferente da classe adicionar indentificador
@@ -18,8 +19,18 @@ public class Customers {
         this.name = name;
     }
 
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
     public Customers() {
     }
+    @OneToMany(mappedBy = "customer")
+    private Set<Order> orders;
 
     public Customers(String name) {
         this.name = name;

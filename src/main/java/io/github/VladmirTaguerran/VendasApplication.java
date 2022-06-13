@@ -18,27 +18,6 @@ import java.util.Optional;
 @RestController
 public class VendasApplication {
 
-    @Value("${application.name}")
-    private String applicationName;
-
-    @Bean
-    public CommandLineRunner init(@Autowired CustomersRepository customers){
-        return args -> {
-            customers.save(new Customers("teste1"));
-            customers.save(new Customers("VLAD"));
-            Optional<Customers> teste = customers.findById(2);
-            List<Customers> listAll = customers.findAll();
-            listAll.forEach(System.out::println);
-            System.out.println(teste);
-        };
-
-
-    }
-    @GetMapping("/")
-    public String helloWord(){
-        return applicationName;
-    }
-
 
     public static void main(String[] args) {
         SpringApplication.run(VendasApplication.class, args);
